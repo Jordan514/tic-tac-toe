@@ -1,0 +1,28 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#score-board {
+  height: 10vh;
+  display: grid;
+  grid-template: 1fr 1fr 1fr / 1fr 1fr;
+}
+
+#gameboard {
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  height: 300px;
+  width: 300px;
+  border: solid black;
+}
+
+#gameboard div {
+  border: solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: xx-large;
+}
