@@ -62,10 +62,15 @@ let domManipulation = (function () {
       let gridCell = document.createElement("div");
       gridCell.setAttribute("class", `spot${i + 1}`);
       gridCell.textContent = array[i];
-      gridCell.addEventListener("click", function clicky() {
+
+      const onClickAddMarker = () => {
         domManipulation.addMarker(GameBoard.currentPlayer.mark, i + 1);
         gameFlow.changePlayer();
-      });
+        gridCell.removeEventListener("click", onClickAddMarker);
+      };
+
+      gridCell.addEventListener("click", onClickAddMarker);
+
       let gameBoard = document.querySelector("#game-board");
       gameBoard.appendChild(gridCell);
     }
@@ -84,7 +89,5 @@ let domManipulation = (function () {
 let players = gameFlow.createPlayers();
 GameBoard.currentPlayer = players[gameFlow.pickFirstTurn()];
 domManipulation.createGrid(GameBoard.gameBoard);
-// gameFlow.playTurn(GameBoard.currentPlayer);
-// this function is not currently necassary
 
 gameFlow.checkIfEndGame(GameBoard.gameBoard);
