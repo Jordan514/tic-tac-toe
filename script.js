@@ -4,7 +4,7 @@ let GameBoard = {
 };
 
 //Factory Function
-function createPlayer(playerName, playerPosition) {
+function createPlayer(playerName = "default names", playerPosition) {
   let score = 0;
   let mark = "";
   let name = playerName;
@@ -39,9 +39,8 @@ let gameFlow = (function () {
 
     return { player1, player2 };
   };
-
   let changePlayer = () => {
-    if (GameBoard.currentPlayer.name == players.player1.name) {
+    if (GameBoard.currentPlayer == players.player1) {
       GameBoard.currentPlayer = players.player2;
     } else {
       GameBoard.currentPlayer = players.player1;
