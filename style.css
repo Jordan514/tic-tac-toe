@@ -36,6 +36,15 @@ body {
   font-size: xx-large;
 }
 
+button {
+  margin-top: 20px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 5px;
+}
+
 .player2,
 .player1 {
   display: flex;

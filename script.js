@@ -141,7 +141,11 @@ let domManipulation = (function () {
     document.querySelector(".score1").textContent = players.player1.score;
     document.querySelector(".score2").textContent = players.player2.score;
   };
-  return { createGrid, changeNames, addMarker, updateScores };
+  let addResetButton = () => {
+    let button = document.querySelector("button");
+    button.addEventListener("click", () => gameFlow.resetGameboard());
+  };
+  return { createGrid, changeNames, addMarker, updateScores, addResetButton };
 })();
 
 let otherTools = (function () {
@@ -153,5 +157,6 @@ let otherTools = (function () {
 
 //Game setup
 let players = gameFlow.createPlayers();
+domManipulation.addResetButton();
 GameBoard.currentPlayer = players[gameFlow.pickFirstTurn()];
 domManipulation.createGrid(GameBoard.gameBoard);
