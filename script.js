@@ -3,7 +3,6 @@ let GameBoard = {
   currentPlayer: "",
 };
 
-//Player 2 is always X
 //Factory Function
 function createPlayer(playerName, playerPosition) {
   let score = 0;
@@ -51,48 +50,55 @@ let gameFlow = (function () {
   let checkIfEndGame = (array = []) => {
     let x = "XXX";
     let o = "OOO";
-    //row
-    let winr1 = array[0] + array[1] + array[2];
-    let winr2 = array[3] + array[4] + array[5];
-    let winr3 = array[6] + array[7] + array[8];
-    //coloum
-    let winc1 = array[0] + array[3] + array[6];
-    let winc2 = array[1] + array[4] + array[7];
-    let winc3 = array[2] + array[5] + array[8];
-    //diagnal
-    let wind1 = array[0] + array[4] + array[8];
-    let wind2 = array[6] + array[4] + array[2];
-    let winConditionArray = [
-      winr1,
-      winr2,
-      winr3,
-      winc1,
-      winc2,
-      winc3,
-      wind1,
-      wind2,
-    ];
-    for (item of winConditionArray) {
-      if (item == x) {
-        alert(`${players.player2.name} Wins!`);
-        players.player2.score += 1;
-        gameFlow.resetGameboard();
-      } else if (item == o) {
-        alert(`${players.player1.name} Wins!`);
-        players.player1.score += 1;
-        gameFlow.resetGameboard();
-      }
+    let gameBoardString = "";
+    for (item of array) {
+      gameBoardString += item;
     }
-    domManipulation.updateScores();
+    //tie game check
+    if (gameBoardString.length == 9) {
+      alert("Tie Game!");
+      gameFlow.resetGameboard();
+    } else {
+      //row
+      let winr1 = array[0] + array[1] + array[2];
+      let winr2 = array[3] + array[4] + array[5];
+      let winr3 = array[6] + array[7] + array[8];
+      //coloum
+      let winc1 = array[0] + array[3] + array[6];
+      let winc2 = array[1] + array[4] + array[7];
+      let winc3 = array[2] + array[5] + array[8];
+      //diagnal
+      let wind1 = array[0] + array[4] + array[8];
+      let wind2 = array[6] + array[4] + array[2];
+      let winConditionArray = [
+        winr1,
+        winr2,
+        winr3,
+        winc1,
+        winc2,
+        winc3,
+        wind1,
+        wind2,
+      ];
+      for (item of winConditionArray) {
+        if (item == x) {
+          alert(`${players.player2.name} Wins!`);
+          players.player2.score += 1;
+          gameFlow.resetGameboard();
+        } else if (item == o) {
+          alert(`${players.player1.name} Wins!`);
+          players.player1.score += 1;
+          gameFlow.resetGameboard();
+        }
+      }
+      domManipulation.updateScores();
+    }
   };
   let resetGameboard = () => {
     GameBoard.gameBoard = ["", "", "", "", "", "", "", "", ""];
-    // not needed anymore?
-    // for (let i = 0; i < GameBoard.gameBoard.length; i++) {
-    //   document.querySelector("#game-board").removeChild(`.spot${i + 1}`);
-    // }
     document.querySelector("#game-board").innerHTML = "";
     domManipulation.createGrid(GameBoard.gameBoard);
+    gameFlow.pickFirstTurn();
   };
   return {
     pickFirstTurn,
@@ -145,8 +151,7 @@ let otherTools = (function () {
   return { capitalizeFirstLetter };
 })();
 
-//Setup
+//Game setup
 let players = gameFlow.createPlayers();
-//actually playing the game
 GameBoard.currentPlayer = players[gameFlow.pickFirstTurn()];
 domManipulation.createGrid(GameBoard.gameBoard);
