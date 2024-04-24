@@ -1,6 +1,3 @@
-* {
-}
-
 body {
   display: flex;
   align-items: center;
@@ -9,7 +6,7 @@ body {
 }
 
 #score-board {
-  height: 20vh;
+  height: 10vh;
   display: grid;
   grid-template: 1fr 1fr 1fr / 1fr 1fr;
   justify-content: center;
