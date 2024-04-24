@@ -155,7 +155,7 @@ let otherTools = (function () {
   return { capitalizeFirstLetter };
 })();
 
-//Game setup
+//Inital Game setup
 let players = gameFlow.createPlayers();
 domManipulation.addResetButton();
 GameBoard.currentPlayer = players[gameFlow.pickFirstTurn()];
