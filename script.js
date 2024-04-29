@@ -46,6 +46,9 @@ let gameFlow = (function () {
     } else {
       GameBoard.currentPlayer = players.player1;
     }
+    document.querySelector(
+      ".current-turn"
+    ).textContent = `Current player is ${GameBoard.currentPlayer.name}`;
   };
   let checkIfEndGame = (array = []) => {
     let x = "XXX";
